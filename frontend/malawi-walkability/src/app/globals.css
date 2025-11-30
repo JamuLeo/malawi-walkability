@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .leaflet-container {
   height: 100%;
   width: 100%;
@@ -10,6 +11,7 @@
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -25,10 +27,27 @@
   background: #94a3b8;
 }
 
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+
 .leaflet-popup-content-wrapper {
   border-radius: 8px;
 }
 
 .leaflet-popup-content {
   margin: 8px 12px;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
