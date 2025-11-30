@@ -6,7 +6,16 @@ export default function StatsPanel() {
   const { stats, loading } = useStats()
 
   if (loading) {
-    return <div className="bg-gray-50 rounded-lg p-4 animate-pulse h-48"></div>
+    return (
+      <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 animate-pulse">
+        <div className="h-6 bg-gray-300 rounded mb-4 w-1/2"></div>
+        <div className="grid grid-cols-2 gap-3">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="bg-gray-300 rounded p-3 h-16"></div>
+          ))}
+        </div>
+      </div>
+    )
   }
 
   return (

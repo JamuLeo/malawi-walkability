@@ -6,7 +6,7 @@
 .leaflet-container {
   height: 100%;
   width: 100%;
-  z-index: 0;
+  z-index: 1;
 }
 
 ::-webkit-scrollbar {
@@ -44,8 +44,15 @@
 .leaflet-popup-content {
   margin: 8px 12px;
 }
-
-
+.leaflet-control {
+  z-index: 400;
+}
+.leaflet-top, .leaflet-bottom {
+  z-index: 400 !important;
+}
+.absolute, .fixed {
+  z-index: 1000;
+}
 body {
   margin: 0;
   padding: 0;
