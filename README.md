@@ -28,18 +28,7 @@ This project identifies areas with poor walkability and limited access to essent
 - Identify priority areas for pedestrian improvements in **Blantyre**
 - Analyze access to **Blantyre schools** and **Blantyre healthcare facilities**
 
-## 📁 Project Structure
-malawi-walkability/
-├── backend/ # Flask API for Blantyre data
-│ ├── app.py # Main Flask application
-│ ├── requirements.txt # Python dependencies
-│ └── data/processed/ # Blantyre GeoJSON data
-└── frontend/ # Next.js application for Blantyre
-│ ├── src/app/ # Next.js pages
-│ ├── src/components/ # React components
-│ └── package.json # Node.js dependencies
 
-text
 
 ## 🛠️ Tech Stack
 
