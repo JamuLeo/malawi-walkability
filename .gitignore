@@ -1,5 +1,6 @@
 # Block ENTIRE data folder and all contents
 data/
+venv/
 
 # Python files
 __pycache__/
