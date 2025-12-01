@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [35.3240, -15.3850],
+          [35.3300, -15.3900]
+        ]
+      },
+      "properties": {
+        "road_name": "M3 - Zomba Road",
+        "security_status": "secure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [35.3100, -15.3800],
+          [35.3000, -15.3700]
+        ]
+      },
+      "properties": {
+        "road_name": "Chikanda Road",
+        "security_status": "insecure"
+      }
+    }
+  ]
+}
