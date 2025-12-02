@@ -1,55 +1,75 @@
 from flask import Blueprint, jsonify
 import json
-import os
 from pathlib import Path
+from src.api.core.walkability import walkability_scorer
 
-# Create blueprint
 roads_bp = Blueprint('roads', __name__)
 
-# Sample road data (will be replaced with real data later)
-sample_roads = [
-    {
-        'id': 1,
-        'name': 'Chileka Road',
-        'walkability_score': 75,
-        'safety_score': 70,
-        'road_type': 'primary',
-        'coordinates': [[35.01, -15.78], [35.015, -15.785]]
-    },
-    {
-        'id': 2,
-        'name': 'Glyn Jones Road',
-        'walkability_score': 45,
-        'safety_score': 40,
-        'road_type': 'secondary',
-        'coordinates': [[35.02, -15.79], [35.025, -15.795]]
-    }
-]
+def load_blantyre_roads():
+    """Load Blantyre roads data"""
+    try:
+        blantyre_path = Path('data/blantyre/roads.json')
+        with open(blantyre_path, 'r') as f:
+            data = json.load(f)
+        return data.get('features', [])
+    except Exception as e:
+        print(f"Error loading Blantyre roads: {e}")
+        return []
 
 @roads_bp.route('/roads')
 def get_roads():
-    '''Get all road segments'''
-    return jsonify(sample_roads)
-
-@roads_bp.route('/roads/<int:road_id>')
-def get_road(road_id):
-    '''Get specific road by ID'''
-    for road in sample_roads:
-        if road['id'] == road_id:
-            return jsonify(road)
-    return jsonify({'error': 'Road not found'}), 404
+    """Get Blantyre road segments with walkability scores"""
+    roads = load_blantyre_roads()
+    
+    if not roads:
+        return jsonify({'error': 'No Blantyre roads data found'}), 404
+    
+    scored_roads = []
+    for road in roads:
+        score = walkability_scorer.score_road_feature(road)
+        classification = walkability_scorer.classify_walkability(score)
+        
+        # Add scores to properties
+        road['properties']['walkability_score'] = score
+        road['properties']['walkability_category'] = classification['category']
+        road['properties']['color'] = classification['color']
+        
+        scored_roads.append(road)
+    
+    return jsonify({
+        'type': 'FeatureCollection',
+        'features': scored_roads,
+        'count': len(scored_roads),
+        'district': 'Blantyre',
+        'message': 'Blantyre roads with walkability scores'
+    })
 
 @roads_bp.route('/roads/stats')
 def get_road_stats():
-    '''Get road statistics'''
-    total_roads = len(sample_roads)
-    avg_score = sum(r['walkability_score'] for r in sample_roads) / total_roads
+    """Get Blantyre road statistics"""
+    roads = load_blantyre_roads()
+    
+    if not roads:
+        return jsonify({'error': 'No Blantyre roads data found'}), 404
+    
+    # Calculate scores
+    scores = []
+    for road in roads:
+        score = walkability_scorer.score_road_feature(road)
+        scores.append(score)
+    
+    avg_score = sum(scores) / len(scores) if scores else 0
+    
+    # Count road types
+    road_types = {}
+    for road in roads:
+        road_type = road['properties'].get('highway', 'unknown')
+        road_types[road_type] = road_types.get(road_type, 0) + 1
     
     return jsonify({
-        'total_roads': total_roads,
-        'avg_walkability_score': avg_score,
-        'road_types': {
-            'primary': 1,
-            'secondary': 1
-        }
+        'district': 'Blantyre',
+        'total_roads': len(roads),
+        'avg_walkability_score': round(avg_score, 2),
+        'road_types': road_types,
+        'data_source': 'Blantyre filtered data'
     })
