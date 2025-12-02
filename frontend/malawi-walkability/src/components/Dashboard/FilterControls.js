@@ -1,43 +1,53 @@
+import styles from './filterControls.module.css'
 
 export default function FilterControls({ filters, setFilters }) {
   return (
-    <div className="bg-gray-50 rounded-lg p-4">
-      <h3 className="font-bold text-lg mb-4">Filters</h3>
-      
-      <div className="space-y-4">
+    <div className={styles.wrapper}>
+      <h3 className={styles.title}>Filters</h3>
+
+      <div>
+
         {/* Score Range */}
-        <div>
-          <label className="block text-sm font-medium mb-2">
-            Walkability Score Range
-          </label>
-          <div className="flex gap-2 items-center">
+        <div className={styles.section}>
+          <label className={styles.label}>Walkability Score Range</label>
+
+          <div className={styles.rangeRow}>
             <input
               type="number"
               min="0"
               max="100"
               value={filters.minScore}
-              onChange={(e) => setFilters({...filters, minScore: parseInt(e.target.value)})}
-              className="w-20 px-2 py-1 border rounded"
+              onChange={(e) =>
+                setFilters({ ...filters, minScore: parseInt(e.target.value) })
+              }
+              className={styles.inputSmall}
             />
+
             <span>to</span>
+
             <input
               type="number"
               min="0"
               max="100"
               value={filters.maxScore}
-              onChange={(e) => setFilters({...filters, maxScore: parseInt(e.target.value)})}
-              className="w-20 px-2 py-1 border rounded"
+              onChange={(e) =>
+                setFilters({ ...filters, maxScore: parseInt(e.target.value) })
+              }
+              className={styles.inputSmall}
             />
           </div>
         </div>
 
         {/* Road Type */}
-        <div>
-          <label className="block text-sm font-medium mb-2">Road Type</label>
+        <div className={styles.section}>
+          <label className={styles.label}>Road Type</label>
+
           <select
             value={filters.roadType}
-            onChange={(e) => setFilters({...filters, roadType: e.target.value})}
-            className="w-full px-3 py-2 border rounded-lg"
+            onChange={(e) =>
+              setFilters({ ...filters, roadType: e.target.value })
+            }
+            className={styles.select}
           >
             <option value="all">All Types</option>
             <option value="primary">Primary Roads</option>
@@ -47,27 +57,32 @@ export default function FilterControls({ filters, setFilters }) {
         </div>
 
         {/* Service Toggles */}
-        <div className="space-y-2">
-          <label className="flex items-center gap-2">
+        <div className={styles.section}>
+          <label className={styles.checkboxRow}>
             <input
               type="checkbox"
               checked={filters.showSchools}
-              onChange={(e) => setFilters({...filters, showSchools: e.target.checked})}
-              className="w-4 h-4"
+              onChange={(e) =>
+                setFilters({ ...filters, showSchools: e.target.checked })
+              }
+              className={styles.checkbox}
             />
-            <span className="text-sm">Show Schools</span>
+            <span className={styles.checkboxLabel}>Show Schools</span>
           </label>
-          
-          <label className="flex items-center gap-2">
+
+          <label className={styles.checkboxRow}>
             <input
               type="checkbox"
               checked={filters.showHealth}
-              onChange={(e) => setFilters({...filters, showHealth: e.target.checked})}
-              className="w-4 h-4"
+              onChange={(e) =>
+                setFilters({ ...filters, showHealth: e.target.checked })
+              }
+              className={styles.checkbox}
             />
-            <span className="text-sm">Show Health Facilities</span>
+            <span className={styles.checkboxLabel}>Show Health Facilities</span>
           </label>
         </div>
+
       </div>
     </div>
   )

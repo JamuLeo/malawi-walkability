@@ -1,0 +1,40 @@
+.header {
+  background: linear-gradient(to right, #ff5816, #ff0000); /* orange → red */
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 16px 24px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: bold;
+}
+
+.subtitle {
+  color: #dbeafe; /* blue-100 */
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+.dataSource {
+  text-align: right;
+}
+
+.dataTitle {
+  font-size: 0.875rem;
+  color: #dbeafe;
+}
+
+.dataSub {
+  font-size: 0.75rem;
+  color: #bfdbfe;
+}

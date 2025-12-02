@@ -1,17 +1,18 @@
 'use client'
 
 import { useStats } from '@/hooks/useMapData'
+import styles from './statsPanel.module.css'
 
 export default function StatsPanel() {
   const { stats, loading } = useStats()
 
   if (loading) {
     return (
-      <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 animate-pulse">
-        <div className="h-6 bg-gray-300 rounded mb-4 w-1/2"></div>
-        <div className="grid grid-cols-2 gap-3">
+      <div className={`${styles.panel} ${styles.loading}`}>
+        <div className={styles.loadingTitle}></div>
+        <div className={styles.grid}>
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="bg-gray-300 rounded p-3 h-16"></div>
+            <div key={i} className={styles.loadingBox}></div>
           ))}
         </div>
       </div>
@@ -19,28 +20,28 @@ export default function StatsPanel() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
-      <h3 className="font-bold text-lg mb-4">Blantyre Overview</h3>
-      
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white rounded p-3">
-          <p className="text-2xl font-bold text-blue-600">{stats.totalRoads}</p>
-          <p className="text-xs text-gray-600">Total Roads</p>
+    <div className={styles.panel}>
+      <h3 className={styles.title}>Blantyre Overview</h3>
+
+      <div className={styles.grid}>
+        <div className={styles.card}>
+          <p className={`${styles.value} ${styles.blue}`}>{stats.totalRoads}</p>
+          <p className={styles.label}>Total Roads</p>
         </div>
-        
-        <div className="bg-white rounded p-3">
-          <p className="text-2xl font-bold text-green-600">{stats.avgScore}</p>
-          <p className="text-xs text-gray-600">Avg Score</p>
+
+        <div className={styles.card}>
+          <p className={`${styles.value} ${styles.green}`}>{stats.avgScore}</p>
+          <p className={styles.label}>Avg Score</p>
         </div>
-        
-        <div className="bg-white rounded p-3">
-          <p className="text-2xl font-bold text-orange-600">{stats.priorityRoads}</p>
-          <p className="text-xs text-gray-600">Priority Roads</p>
+
+        <div className={styles.card}>
+          <p className={`${styles.value} ${styles.orange}`}>{stats.priorityRoads}</p>
+          <p className={styles.label}>Priority Roads</p>
         </div>
-        
-        <div className="bg-white rounded p-3">
-          <p className="text-2xl font-bold text-purple-600">{stats.totalServices}</p>
-          <p className="text-xs text-gray-600">Services</p>
+
+        <div className={styles.card}>
+          <p className={`${styles.value} ${styles.purple}`}>{stats.totalServices}</p>
+          <p className={styles.label}>Services</p>
         </div>
       </div>
     </div>

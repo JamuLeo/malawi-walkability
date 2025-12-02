@@ -1,0 +1,137 @@
+.loading {
+  background: #f9fafb; /* gray-50 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  animation: pulse 1.5s infinite ease-in-out;
+  height: 16rem; /* h-64 */
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.wrapper {
+  background: white;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb; /* border-gray-200 */
+}
+
+.header {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fef2f2; /* red-50 */
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.125rem; /* text-lg */
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  color: #4b5563; /* gray-600 */
+  margin-top: 0.25rem;
+}
+
+.list {
+  max-height: 24rem; /* max-h-96 */
+  overflow-y: auto;
+}
+
+.empty {
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280; /* gray-500 */
+  font-size: 0.875rem;
+}
+
+.emptySmall {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  color: #6b7280;
+}
+
+.item {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: #f9fafb; /* gray-50 */
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.left {
+  flex: 1;
+}
+
+.rankLine {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.rank {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #9ca3af; /* gray-400 */
+}
+
+.name {
+  font-weight: 600;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  background: #fee2e2; /* red-100 */
+  color: #b91c1c; /* red-700 */
+}
+
+/* Priority label colors */
+.priorityCritical {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.priorityHigh {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.priorityMedium {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.priorityLabel {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+}

@@ -1,0 +1,64 @@
+.panel {
+  background: linear-gradient(to bottom right, #eff6ff, #dbeafe); /* blue-50 → blue-100 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.125rem; /* text-lg */
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem; /* gap-3 */
+}
+
+.card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.value {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: bold;
+}
+
+.label {
+  font-size: 0.75rem; /* text-xs */
+  color: #4b5563; /* gray-600 */
+}
+
+/* Colors */
+.blue { color: #2563eb; }
+.green { color: #16a34a; }
+.orange { color: #ea580c; }
+.purple { color: #7c3aed; }
+
+/* Loading placeholders */
+.loadingTitle {
+  height: 1.5rem;
+  background: #d1d5db;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  width: 50%;
+}
+
+.loadingBox {
+  background: #d1d5db;
+  border-radius: 0.5rem;
+  height: 4rem;
+  padding: 0.75rem;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

@@ -1,0 +1,26 @@
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+}
+
+
+.mapContainer {
+  flex: 1;
+  position: relative;
+}
+
+.sidebar {
+  width: 350px; /* or whatever width you want */
+  height: 100vh; /* full height */
+  overflow-y: auto; /* enables scrolling */
+  overflow-x: hidden;
+  padding: 1rem;
+  box-sizing: border-box;
+  background: #fff; /* optional */
+}
