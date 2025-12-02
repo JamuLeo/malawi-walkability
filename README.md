@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Malawi Urban Walkability Analysis - Blantyre District
+A Next.js web application that analyzes pedestrian accessibility in Blantyre District, Malawi using real spatial data.
 
-## Getting Started
+🎯 What is Walkability Analysis?
+Walkability analysis measures how easy and safe it is for people to walk to essential services like schools, hospitals, and shops in Blantyre. Our tool scores Blantyre streets based on pedestrian safety and infrastructure quality, identifies areas with poor access to essential services in Blantyre, and highlights priority zones for sidewalk and crossing improvements in Blantyre.
 
-First, run the development server:
+🏗️ Project Overview
+This project identifies areas with poor walkability and limited access to essential services in Blantyre District. We combine spatial analysis with web visualization to help urban planners prioritize pedestrian infrastructure investments in Blantyre's urban areas.
 
-```bash
+🔑 Key Differences from Navigation Apps
+Feature	Navigation Apps	Our Blantyre Walkability Tool
+Purpose	Route from A to B	Blantyre neighborhood walkability assessment
+Focus	Trip navigation	Blantyre infrastructure quality & service access
+Users	General public	Blantyre urban planners, policymakers
+Output	Directions	Blantyre priority zones for improvements
+🚀 Features
+For Blantyre District:
+Calculate walkability scores for Blantyre streets
+
+Interactive maps showing walkability levels across Blantyre
+
+Identify priority areas for pedestrian improvements in Blantyre
+
+Analyze access to Blantyre schools and Blantyre healthcare facilities
+
+🛠️ Tech Stack
+Backend (Data Processing & API)
+Python/Flask API - Serves Blantyre spatial data
+
+HDX Malawi Datasets - Filtered for Blantyre District
+
+GeoJSON - Blantyre roads, schools, health facilities
+
+Frontend (User Interface - NEXT.JS)
+Next.js 14 - React framework with App Router
+
+Leaflet.js - Interactive Blantyre maps
+
+React-Leaflet - React components for Blantyre mapping
+
+Tailwind CSS - Styling
+
+Data Focus: Blantyre District
+Blantyre Roads (from OpenStreetMap via HDX)
+
+Blantyre Health Facilities (from HDX)
+
+Blantyre Schools (from HDX)
+
+Blantyre District Boundary (from HDX)
+
+🚀 Quick Start
+1. Clone Repository
+bash
+git clone https://github.com/JamuLeo/malawi-walkability.git
+cd malawi-walkability
+2. Backend Setup (Flask API)
+bash
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Run Flask API for Blantyre data
+python app.py
+# API runs at: http://localhost:5000
+3. Frontend Setup (Next.js)
+bash
+cd frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Frontend runs at: http://localhost:3000
+🏗️ Backend API Endpoints
+Core Walkability Endpoints
+Road Scoring API: GET /api/roads
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Calculates walkability scores for all Blantyre streets
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Returns GeoJSON with scores (0-100), categories, and colors
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Uses walkability_scorer.score_road_feature() algorithm
 
-## Learn More
+Priority Analysis API: GET /api/analysis/priorities
 
-To learn more about Next.js, take a look at the following resources:
+Identifies priority areas needing pedestrian improvements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Returns ranked areas based on walkability scores
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+District Statistics API: GET /api/analysis/stats
 
-## Deploy on Vercel
+Provides overall Blantyre statistics including road counts and service access
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+API Testing URLs
+http://localhost:5000/api/roads - Scored roads data
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+http://localhost:5000/api/analysis/priorities - Priority areas
+
+http://localhost:5000/api/analysis/stats - District statistics
