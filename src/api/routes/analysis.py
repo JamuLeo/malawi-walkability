@@ -71,6 +71,7 @@ def get_priorities():
     """Get Blantyre priority areas based on real data analysis"""
     try:
         # Load the actual roads data
+		
         roads_path = Path('data/blantyre/roads.json')
         with open(roads_path, 'r') as f:
             roads_data = json.load(f)

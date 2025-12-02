@@ -7,6 +7,7 @@ roads_bp = Blueprint('roads', __name__)
 
 def load_blantyre_roads():
     """Load Blantyre roads data"""
+	
     try:
         blantyre_path = Path('data/blantyre/roads.json')
         with open(blantyre_path, 'r') as f:
