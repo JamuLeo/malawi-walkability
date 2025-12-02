@@ -1,3 +1,4 @@
+across the district.
 Malawi Urban Walkability Analysis - Blantyre District
 A web application that analyzes pedestrian accessibility in Blantyre District, Malawi using real spatial data.
 
