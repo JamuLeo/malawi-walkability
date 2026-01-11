@@ -2,11 +2,9 @@ Malawi Urban Walkability Analysis - Blantyre District
 A Next.js web application that analyzes pedestrian accessibility in Blantyre District, Malawi using real spatial data.
 
 🎯 What is Walkability Analysis?
-
 Walkability analysis measures how easy and safe it is for people to walk to essential services like schools, hospitals, and shops in Blantyre. Our tool scores Blantyre streets based on pedestrian safety and infrastructure quality, identifies areas with poor access to essential services in Blantyre, and highlights priority zones for sidewalk and crossing improvements in Blantyre.
 
 🏗️ Project Overview
-
 This project identifies areas with poor walkability and limited access to essential services in Blantyre District. We combine spatial analysis with web visualization to help urban planners prioritize pedestrian infrastructure investments in Blantyre's urban areas.
 
 🔑 Key Differences from Navigation Apps
