@@ -6,6 +6,7 @@ services_bp = Blueprint('services', __name__)
 
 def load_blantyre_services():
     """Load Blantyre schools and health facilities"""
+	
     try:
         # Load schools
         schools_path = Path('data/blantyre/schools.json')

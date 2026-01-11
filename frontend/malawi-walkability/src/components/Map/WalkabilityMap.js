@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { useMapData } from '@/hooks/useMapData'
-import MapLegend from './MapLegend'
 
 // Dynamically import Leaflet components with SSR disabled
 const MapContainer = dynamic(
@@ -22,7 +21,6 @@ const ServiceMarkers = dynamic(() => import('./ServiceMarkers'), { ssr: false })
 export default function WalkabilityMap({ filters = {}, selectedRoad, onRoadSelect }) {
   const { roads, services, loading } = useMapData()
 
- 
   const safeFilters = {
     minScore: filters.minScore || 0,
     maxScore: filters.maxScore || 100,
@@ -34,16 +32,34 @@ export default function WalkabilityMap({ filters = {}, selectedRoad, onRoadSelec
   // Blantyre coordinates
   const blantyreCenter = [-15.7861, 35.0058]
   
-  const filteredRoads = roads.filter(road => {
-    const score = road.properties?.safety_score || road.properties?.walkability_score || 50
-    return score >= safeFilters.minScore && score <= safeFilters.maxScore
-  })
+  // FIXED: Proper filtering with all criteria
+  const filteredRoads = Array.isArray(roads) ? roads.filter(road => {
+    const properties = road.properties || {}
+    
+    // Get walkability score
+    const score = properties.walkability_score || properties.safety_score || 50
+    
+    // Get road type
+    const roadType = properties.highway || 'unknown'
+    
+    // Apply all filters
+    const scoreMatch = score >= safeFilters.minScore && score <= safeFilters.maxScore
+    const typeMatch = safeFilters.roadType === 'all' || roadType === safeFilters.roadType
+    
+    return scoreMatch && typeMatch
+  }) : []
 
-  const filteredServices = services.filter(service => {
-    if (service.properties?.type === 'school') return safeFilters.showSchools
-    if (service.properties?.type === 'health') return safeFilters.showHealth
+  const filteredServices = Array.isArray(services) ? services.filter(service => {
+    const serviceType = service.properties?.type || ''
+    
+    if (serviceType === 'school') return safeFilters.showSchools
+    if (serviceType === 'health') return safeFilters.showHealth
     return false
-  })
+  }) : []
+
+  // Calculate stats for legend
+  const visibleRoadsCount = filteredRoads.length
+  const visibleServicesCount = filteredServices.length
 
   if (loading) {
     return (
@@ -58,7 +74,27 @@ export default function WalkabilityMap({ filters = {}, selectedRoad, onRoadSelec
 
   return (
     <div className="relative w-full h-full">
-     
+      {/* Stats overlay */}
+      <div className="absolute top-4 left-4 z-[1000] bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
+        <div className="flex gap-4">
+          <div className="text-center">
+            <p className="text-xl font-bold text-blue-600">{visibleRoadsCount}</p>
+            <p className="text-xs text-gray-600">Visible Roads</p>
+          </div>
+          <div className="text-center">
+            <p className="text-xl font-bold text-green-600">{visibleServicesCount}</p>
+            <p className="text-xs text-gray-600">Visible Services</p>
+          </div>
+        </div>
+        {safeFilters.roadType !== 'all' && (
+          <p className="text-xs text-gray-500 mt-2">
+            Showing: {safeFilters.roadType} roads
+          </p>
+        )}
+        <p className="text-xs text-gray-500 mt-1">
+          Score range: {safeFilters.minScore}-{safeFilters.maxScore}
+        </p>
+      </div>
       
       <MapContainer
         center={blantyreCenter}
